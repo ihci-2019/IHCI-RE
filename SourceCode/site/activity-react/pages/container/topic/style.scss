@@ -1,0 +1,88 @@
+.topic-page {
+    .return{
+        cursor: pointer;
+        margin-left:0.25rem;
+        margin-top: 40px;
+        display: block;
+        padding: 10px 0 10px 0;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        width:  95%;
+        height:45px;
+        font-size: 25px;
+        color: #888888;
+        background: #f9f9f9;
+        border: 2px solid #e6e6e6;
+        border-bottom: none;
+        -webkit-border-radius: 0.056667rem 0.056667rem 0 0;
+        border-radius: 0.056667rem 0.056667rem 0 0;
+        .teamName{
+            margin-left:20px;
+        }
+        &:hover{
+            background-color: #fff;
+        }
+    }
+    .sp-nav {
+        margin: 10px 0 30px 0;
+        font-size: 20px;
+
+        .to-team {
+            font-weight: bold;
+            font-size: 20px;
+            cursor: pointer;
+            color: rgb(42, 42, 50);
+        }
+        .pre-tag{
+            cursor: pointer;
+        }
+    }
+    
+
+    .topic-con {
+        box-sizing: border-box;
+        width: 1280px;
+        background-color: #fff;
+        border: 1px solid #e6e6e6; /*no*/
+        border-radius: 2px;
+        padding: 20px 30px 40px 30px;
+
+
+        .div-line {
+            width: 98%;
+            height: 1px;
+            border-bottom: 1px solid #e6e6e6; /*no*/
+            margin: 30px auto 30px auto;
+        }
+
+    }
+}
+
+.file-list {
+    margin: 10px 100px 0px;
+    padding: 14px;
+    .file-pic-item {
+        display: inline-block;
+        margin-right:40px;
+        margin-top:20px;
+        width:140px;
+        color: #6a6f7b;
+        text-align: center;
+        .file-pic{
+            width:140px;
+            text-align: center;
+        }
+        .file-name{
+            text-align: center;
+            margin-top: 20px;
+        }
+    }
+    .file-item {
+        margin-top:20px;
+        color: #6a6f7b;
+    }
+}
+.infrom {
+    margin-bottom: 20px;
+}

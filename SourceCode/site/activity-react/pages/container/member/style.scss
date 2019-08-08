@@ -1,0 +1,124 @@
+.member-page {
+    margin-top: 30px;
+    .page-wrap {
+        padding: 20px 30px 40px 30px;
+    }
+    .teamList {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 40px;
+        
+        .team-tag-item {
+            cursor: pointer;
+            line-height: 50px;
+            height: 50px;
+            padding: 0 40px;
+            color: #666;
+            background-color: #f1f1f1;
+            border-radius: 100px;
+            margin-right: 40px;
+            margin-bottom: 30px;
+            font-size: 20px; 
+            transition: background-color 0.5s;
+            -webkit-transition: background-color 0.5s;
+            -moz-transition: background-color 0.5s;
+
+            &.act {
+                background-color: rgb(255, 170, 43);
+                color: #fff;
+                font-weight: bold;
+                transition: background-color 0.3s;
+                -webkit-transition: background-color 0.3s;
+                -moz-transition: background-color 0.3s;
+            }
+        }
+
+    }
+
+    .member-item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        height: 120px;
+        border-top: 1px solid #e6e6e6; /*no*/
+        .head-img {
+            cursor: pointer;
+            height: 80px;
+            width: 80px;
+            margin-left: 20px;
+            border-radius: 100px;
+        }
+        span {
+            width: 200px;
+            font-size: 20px;
+        }
+        .admin {
+            position: absolute;
+            background-color: #e6e6e6;
+            height: 120px;
+            width: 170px;
+            right: 0px;
+            top: 90px;
+            z-index: 2;
+        }
+    }
+
+
+}
+
+.load-more {
+    cursor: pointer;
+    margin: auto;
+    height: 40px;
+    line-height: 40px;
+    padding: 0px 30px;
+    border-radius: 6px;
+    margin-top: 30px;
+    width: 200px;
+    font-size: 18px;
+    color: #666;
+    background-color: #e6e6e6;
+    text-align: center;
+}
+
+.load-more:active{
+    background-color: rgb(255, 235, 205);
+}
+
+.no-more {
+    cursor: default;
+    margin: auto;
+    height: 40px;
+    line-height: 40px;
+    padding: 0px 30px;
+    margin-top: 30px;
+    width: 200px;
+    font-size: 18px;
+
+    color: #999;
+    text-align: center;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: bold;
+    padding: 0px 10px;
+    float: left;
+}
+
+h2 {
+    font-size: 28px;
+    color: rgb(141, 141, 141);
+    font-weight: normal;
+    float: left;
+}
+
+.team-name::after {
+    content:""; 
+    padding: 10px 0px 25px 10px;
+    display: block; 
+    clear:both; 
+ }
