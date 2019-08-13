@@ -2,7 +2,7 @@ import * as React from 'react';
 import './style.scss'
 import Page from '../../../components/page'
 import api from '../../../utils/api';
-import { timeBefore, createMarkup } from '../../../utils/util'
+import { timeBefore, createMarkup, sortByCreateTime} from '../../../utils/util'
 import Editor from '../../../components/editor'
 import fileUploader from '../../../utils/file-uploader'
 import MemberChosenList from '../../../components/member-chose-list'
@@ -144,14 +144,17 @@ export default class Topic extends React.Component{
     }
 
     topicContentHandle = (content) => {
-      
+        // WH_DOING
         this.setState({
-            topicContentInput: content
+            topicContentInput: content.replace(new RegExp('<p></p>', 'g'), '<br />')
         })
     }
     discussContentHandle = (content) => {
+        // WH_DOING
+        // console.log(content)
+        // console.log(content.replace(new RegExp('<p></p>', 'g'), '<br />'))
         this.setState({
-            createDiscussContent: content
+            createDiscussContent: content.replace(new RegExp('<p></p>', 'g'), '<br />')
         })
     }
 
@@ -532,7 +535,7 @@ export default class Topic extends React.Component{
 
                     <div className="topic-list">
                     {
-                        this.state.discussList.map((item) => {
+                        sortByCreateTime(this.state.discussList).map((item) => {
                             return (
                                 <TopicDiscussItem 
                                     id={"topic-discuss-item-" + item._id} 
