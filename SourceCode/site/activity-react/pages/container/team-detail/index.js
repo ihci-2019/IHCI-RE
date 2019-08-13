@@ -129,8 +129,9 @@ export default class TeamDetail extends React.Component {
     }
 
     handleTopicContentChange = (content) => {
+        // WH_DOING
         this.setState({
-            topicContent: content
+            topicContent: content.replace(new RegExp('<p></p>', 'g'), '<br />')
         })
     }
 
@@ -788,7 +789,7 @@ export default class TeamDetail extends React.Component {
                 <div className="discuss-con page-wrap">
                     <div className="team-info">
                         <div className="left">
-                            <div className="head">{teamInfo.name}</div>
+                            <div className="head">{teamInfo.name} 团队</div>
                             <pre><div className="team-des">{teamInfo.desc}</div>  </pre>
                         </div>
                         <div className="right">

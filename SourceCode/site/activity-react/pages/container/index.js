@@ -75,42 +75,42 @@ class App extends React.Component{
     }
     handleSetMouseOver() {
         this.setState({
-            menuSetBgColor: '#ccc'
+            menuSetBgColor: 'whitesmoke'
         })
     }
     handleSetMouseOut() {
         this.setState({
-            menuSetBgColor: 'whitesmoke'
+            menuSetBgColor: 'white'
         })
     }
     handleModifyMouseOver() {
         this.setState({
-            menuModifyBgColor: '#ccc'
+            menuModifyBgColor: 'whitesmoke'
         })
     }
     handleModifyMouseOut() {
         this.setState({
-            menuModifyBgColor: 'whitesmoke'
+            menuModifyBgColor: 'white'
         })
     }
     handleCreateMouseOver() {
         this.setState({
-            menuCreateBgColor: '#ccc'
+            menuCreateBgColor: 'whitesmoke'
         })
     }
     handleCreateMouseOut() {
         this.setState({
-            menuCreateBgColor: 'whitesmoke'
+            menuCreateBgColor: 'white'
         })
     }
     handleQuitMouseOver() {
         this.setState({
-            menuQuitBgColor: '#ccc'
+            menuQuitBgColor: 'whitesmoke'
         })
     }
     handleQuitMouseOut() {
         this.setState({
-            menuQuitBgColor: 'whitesmoke'
+            menuQuitBgColor: 'white'
         })
     }
 
@@ -235,14 +235,15 @@ class App extends React.Component{
 
     render() {
         return (
+            
             <div>
                 <div className='main-nav'>
                     {/* 头像-菜单栏 */}
                     <div className="menu" style={{display:this.state.display}}
                     onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>
                         <div className="menuArrow" ></div>{/* 菜单箭头 */}
-                        <div className="menuHeader" >
-                            <div>{this.state.menuName}<small><i className="iconfont icon-people"></i></small></div>
+                        <div className="menuHeader">
+                            <div>{this.state.menuName} <small><i className="iconfont icon-people"></i></small></div>
                             <div>{this.state.menuEmail}</div>
                         </div>
                         <div className="menuSet" onClick={this.routerHandle.bind(this, '/person')}
@@ -253,14 +254,14 @@ class App extends React.Component{
                         onMouseOver={this.handleModifyMouseOver} onMouseOut={this.handleModifyMouseOut}>修改密码</div>
                         <div className="menuCreate" onClick={() => {this.locationTo('/team-create')}}
                         style={{backgroundColor:this.state.menuCreateBgColor}}
-                        onMouseOver={this.handleCreateMouseOver} onMouseOut={this.handleCreateMouseOut}>+创建团队</div>
+                        onMouseOver={this.handleCreateMouseOver} onMouseOut={this.handleCreateMouseOut}>创建团队</div>
                         <div className="menuQuit" onClick={this.logOutHandle}
                         style={{backgroundColor:this.state.menuQuitBgColor}}
                         onMouseOver={this.handleQuitMouseOver} onMouseOut={this.handleQuitMouseOut}>退出</div>
                     </div>
-
-                    <div className="left">
-                        <div className="logo">这是LOGO</div>
+                    {/* WH_DOING */}
+                    <div className="logo">这是LOGO</div>
+                    <div className="center">
                         <div className="nav-list">
                             <span className={this.state.activeTag == 'team' ? 'nav-item active' : 'nav-item'} onClick={this.routerHandle.bind(this, '/team')}>团队</span>
                             <span className={this.state.activeTag == 'timeline' ? 'nav-item active' : 'nav-item'} onClick={this.routerHandle.bind(this, '/timeline')}>动态</span>
@@ -275,15 +276,8 @@ class App extends React.Component{
                                 <input className='searchInput' ref={(input) => { this.searchInputr = input; }} type="text" onChange={this.handleSearchTextChange} placeholder="搜索"/>
                             </form>
                         </div>
-
-                        <div className='nav-item'
-                        onClick={this.routerHandle.bind(this, '/person')}
-                        onMouseOver={this.handleMouseOver}
-                        onMouseLeave={this.handleMouseOut}
-                        >
-                            <img className="head-img" src={this.state.headImg} />
-                        </div>
-
+                        
+                        {/* WH_DOING */}
                         <div className='remind'>
                             <div className={this.state.showRemindCount > 0 ? 'shake' : ''}>
                             <span className='iconfont icon-remind'  onClick={this.routerHandle.bind(this, '/inform')}></span>
@@ -294,11 +288,24 @@ class App extends React.Component{
                             }
                             </div>
                         </div>
+
+                        <div className='nav-item'
+                        onClick={this.routerHandle.bind(this, '/person')}
+                        onMouseOver={this.handleMouseOver}
+                        onMouseLeave={this.handleMouseOut}
+                        >
+                            <img className="head-img" src={this.state.headImg} />
+                        </div>
+
                     </div>
 
                 </div>
-                { this.props.children && React.cloneElement(this.props.children, {personInfo: this.state.personInfo, activeTagHandle: this.activeTagHandle.bind(this)}) }
 
+                
+                {/* LHJ修改 */}
+                <div className='page-style'>
+                    { this.props.children && React.cloneElement(this.props.children, {personInfo: this.state.personInfo, activeTagHandle: this.activeTagHandle.bind(this)}) }
+                </div>                
             </div>
 
         )

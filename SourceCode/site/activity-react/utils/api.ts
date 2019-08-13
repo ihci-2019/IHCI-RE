@@ -1,6 +1,6 @@
 import { stringify } from 'querystring';
 import 'whatwg-fetch'
-const sha256 = require('crypto-js/SHA256')
+const sha256 = require('crypto-js/sha256')
 
 export interface IApiOptions {
     /** 请求的方法 */

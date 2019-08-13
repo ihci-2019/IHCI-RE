@@ -554,8 +554,9 @@ export default class Task extends React.Component{
     }
 
     discussContentHandle = (content) => {
+        // WH_DOING
         this.setState({
-            createTopicContent: content
+            createTopicContent: content.replace(new RegExp('<p></p>', 'g'), '<br />')
         })
     }
 

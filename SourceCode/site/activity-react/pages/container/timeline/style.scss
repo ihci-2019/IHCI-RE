@@ -103,6 +103,7 @@
         padding: 0 20px 30px 88px;
     }
 
+    //LHJ_DOING 动态页时间球
     .time-ball {
         position: absolute;
         left: 0;
@@ -110,6 +111,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        //color:cornflowerblue;
+        //color:#FFFFFF;
+        // background-color: #FF9E29;
+        
+        font-weight:700;
+        font-size: 23px;
 
         height: 80px;
         width: 80px;
@@ -198,7 +205,11 @@
             border-radius: 6px;
             width: 200px;
 
-            background-color: #e6e6e6;
+            background-color: #FF9E29;
+            color:#FFFFFF;
+            font-size: 20px;
+            font-weight: 500;
+            letter-spacing: 2px;
             text-align: center;
 
             

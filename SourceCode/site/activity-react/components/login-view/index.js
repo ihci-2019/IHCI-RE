@@ -134,7 +134,7 @@ export class LoginView extends React.Component {
         if (confirmPassword) {
             createPasswordEmpty = false
         } else {
-            createPassworddEmpty = true
+            createPasswordEmpty = true
         }
         this.setState({
             createPassword: e.target.value,
@@ -145,7 +145,8 @@ export class LoginView extends React.Component {
         })
     }
 
-    loginHandle = async () => {
+    loginHandle = async (e) => {
+        e.preventDefault();
         if (this.state.infoCheck.usernameEmpty) {
             window.toast("用户名为空")
             return
@@ -164,7 +165,8 @@ export class LoginView extends React.Component {
         }
     }
 
-    signHandle = async () => {
+    signHandle = async (e) => {
+        e.preventDefault();
         // todo 检验账号密码是否可用
         if (this.state.infoCheck.createPhoneEmpty) {
             window.toast("手机为空")
@@ -236,6 +238,8 @@ export class LoginView extends React.Component {
             {
                 this.state.loginBlock == "signUp" ?
                     <div className='login-view-form'>
+
+                    <form onSubmit={this.signHandle}>
                         <input type="number" pattern="[0-9]*" className="auth-input" placeholder="请输入手机号"
                             value={this.state.createPhone} onChange={this.createPhoneHandle}
                             onClick={this.judgeUsernameEmptyHandle} autoFocus></input>
@@ -261,19 +265,25 @@ export class LoginView extends React.Component {
                             </ul>
                         </div>
                         }
-                        <div className="submit-btn" onClick={this.signHandle}>加入我们</div>
+                        <button className="submit-btn" >加入我们</button>
+                    </form>
+
                     </div>
                     : ""
             }
             {
                 this.state.loginBlock == "login" ?
                     <div className='login-view-form'>
+
+                    <form onSubmit={this.loginHandle}>
                         <div className="auth-desc">用户名</div>
                         <input type="number" pattern="[0-9]*" className="auth-input" value={this.state.username} onChange={this.usernameHandle}></input>
                         <div className="auth-desc">密码</div>
                         <input className="auth-input" type="password" value={this.state.password} onChange={this.passwordHandle}></input>
                         <div className="forgetPwd" onClick={this.forgetPwd}>忘记密码?</div>
-                        <div className="submit-btn" onClick={this.loginHandle}>加入我们</div>
+                        <button className="submit-btn" >加入我们</button>
+                    </form>
+                    
                         <div className="wx-submit-btn" onClick={this.props.showWxDialogHandle}>
                             <img className="wx-submit-img" src={require('./wechat@2x.png')} />
                             微信登录

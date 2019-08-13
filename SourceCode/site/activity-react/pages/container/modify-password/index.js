@@ -2,7 +2,7 @@ import * as React from 'react';
 import './style.scss'
 import Page from '../../../components/page'
 import api from '../../../utils/api';
-const sha256 = require('crypto-js/SHA256');
+const sha256 = require('crypto-js/sha256');
 
 
 export default class ModidyPassword extends React.Component{

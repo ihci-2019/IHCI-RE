@@ -4,7 +4,7 @@ import Page from '../../../components/page'
 import api from '../../../utils/api';
 //import {WxChoose as staticText} from '../../../commen/static-text'
 import SMSBlock from '../../../components/smsCode'
-const sha256 = require('crypto-js/SHA256');
+const sha256 = require('crypto-js/sha256');
 
 export default class PwdReset extends React.Component{
     state = {
@@ -96,18 +96,28 @@ export default class PwdReset extends React.Component{
     render (){
         return(
             <Page title = "重新设置密码" className = "reset-page">
-                <div className = "auth-form">
-                <div className = "title">重新设置密码</div>
-                <input type="number" pattern="[0-9]*" className = "input-edit" value={this.state.phone} onChange = {this.phoneInputHandle} placeholder = "手机号"></input>
-                <input className = "input-edit" type="password"  value = {this.state.newPassword} onChange = {this.passwordInputHandle} placeholder = "新密码"></input>
-                <SMSBlock 
-                   smsCodeInputHandle = {this.smsCodeInputHandle}
-                   smsCode = {this.state.smsCode}
-                   phoneNumber = {this.state.phone}
-                   phoneEmpty = {this.state.phoneEmpty}
-                />
-                <div className = "reset-btn" onClick = {this.resetPasswordHandle}>确定</div>
-                <div className = "reset-btn" onClick = {this.returnHandle}>返回</div>
+                <div className="logo">
+                    <img src={require('./logo@2x.png')} />
+                </div>
+                
+                <div className = "reset-block">
+                    <span className = "title">重新设置密码</span>
+                    <div className = "input">
+                        <input type="number" pattern="[0-9]*" className = "input-edit" value={this.state.phone} onChange = {this.phoneInputHandle} placeholder = "手机号"></input>
+                        <input className = "input-edit" type="password"  value = {this.state.newPassword} onChange = {this.passwordInputHandle} placeholder = "新密码"></input>
+                        <SMSBlock className = "input-edit"
+                            smsCodeInputHandle = {this.smsCodeInputHandle}
+                            smsCode = {this.state.smsCode}
+                            phoneNumber = {this.state.phone}
+                            phoneEmpty = {this.state.phoneEmpty}
+                        />
+                    </div>
+                    
+                    <div className = "reset">
+                        <div className = "reset-btn" onClick = {this.resetPasswordHandle}>确定</div>
+                        <div className = "reset-btn" onClick = {this.returnHandle}>返回</div>
+                    </div>
+
                 </div>
             </Page>
             
