@@ -65,23 +65,4 @@
             width: 200px;
         }
     }
-
-
-    @media only screen and (min-width: 768px){
-        .page-wrap{
-            width: 100%!important;
-            .main{
-                // padding: 0.4rem 0.4rem;
-                .iframeTest{
-                    width: 100%;
-                    margin-bottom: -1px;
-
-                }
-                .clearFloat{
-                    clear: both;
-                }
-            }
-
-        }
-    }
 }
