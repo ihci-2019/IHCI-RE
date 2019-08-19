@@ -57,7 +57,7 @@ export default class Team extends React.Component{
         let listResult = null
         //如果过了一定时间，后端数据还没全部取回来，则显示loading图标
         setTimeout(()=>{
-            if(!(listResult.data&&result.data)){            
+            if(!(listResult&&result)){            
                 this._page.loading.show(true)    
             }
         },100)
