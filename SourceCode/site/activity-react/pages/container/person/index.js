@@ -628,7 +628,8 @@ export default class Person extends React.Component{
                 <input className='file-input-hidden' type="file" ref={(fileInput) => this.fileInput = fileInput} onChange={this.uploadFileHandle}></input>
                 <div className = "header">
                 <div className="title">{staticText.PAGE_INFO.PAGE_TITLE}</div>
-                <div className="manage" onClick={() => {location.href = '/team-management'}}>{staticText.BUTTON_TEXT.TEAM_EXIT}</div>
+                {/* LHJ_DOING 删除 退出团队 按钮 */}
+                {/* <div className="manage" onClick={() => {location.href = '/team-management'}}>{staticText.BUTTON_TEXT.TEAM_EXIT}</div> */}
                 </div>
                 
                 <div className="head-edit">
@@ -725,9 +726,10 @@ export default class Person extends React.Component{
 
 
                 <div className="save-btn" onClick={this.saveHandle}>保存</div>
-                {
+
+                {/*LHJ_DOING 删除 个人设置 页面的 “登出”按钮
                     !INIT_DATA.isWeixin&&<div className="save-btn" onClick={this.logOutHandle}>登出</div>
-                }
+                */}
                 
                 {
                     this.state.showWxLogin && <WxLoginDialog state="bind" closeHandle={this.closeWxLoginHandle}/>

@@ -71,6 +71,10 @@ export class LoginView extends React.Component {
         } else {
             usernameEmpty = true
         }
+        // WH_DOING，限制只能输入数字
+        if (!(/^[0-9]*$/.test(username))) {
+            return
+        }
         this.setState({
             username: e.target.value,
             infoCheck: {
@@ -103,6 +107,10 @@ export class LoginView extends React.Component {
             createPhoneEmpty = false
         } else {
             createPhoneEmpty = true
+        }
+        // WH_DOING，限制只能输入数字
+        if (!(/^[0-9]*$/.test(createPhone))) {
+            return
         }
         this.setState({
             createPhone: createPhone,
@@ -240,7 +248,7 @@ export class LoginView extends React.Component {
                     <div className='login-view-form'>
 
                     <form onSubmit={this.signHandle}>
-                        <input type="number" pattern="[0-9]*" className="auth-input" placeholder="请输入手机号"
+                        <input pattern="[0-9]*" className="auth-input" placeholder="请输入手机号"
                             value={this.state.createPhone} onChange={this.createPhoneHandle}
                             onClick={this.judgeUsernameEmptyHandle} autoFocus></input>
                         <input type='text' className='auth-input' placeholder='请输入昵称' 
@@ -277,9 +285,9 @@ export class LoginView extends React.Component {
 
                     <form onSubmit={this.loginHandle}>
                         <div className="auth-desc">用户名</div>
-                        <input type="number" pattern="[0-9]*" className="auth-input" value={this.state.username} onChange={this.usernameHandle}></input>
+                        <input pattern="[0-9]*" className="auth-input" placeholder="请输入手机号" value={this.state.username} onChange={this.usernameHandle} autoFocus></input>
                         <div className="auth-desc">密码</div>
-                        <input className="auth-input" type="password" value={this.state.password} onChange={this.passwordHandle}></input>
+                        <input className="auth-input" type="password" placeholder="请输入密码" value={this.state.password} onChange={this.passwordHandle}></input>
                         <div className="forgetPwd" onClick={this.forgetPwd}>忘记密码?</div>
                         <button className="submit-btn" >加入我们</button>
                     </form>

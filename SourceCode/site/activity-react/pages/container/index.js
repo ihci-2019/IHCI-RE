@@ -118,6 +118,8 @@ class App extends React.Component{
 
     componentWillMount = async() => {
         this.setHeadImg()
+        setTimeout(()=>{if (!(/team-join/.test(this.props.location.pathname)) && !this.infoAllFilled()){location.href = '/'}},100)
+        // window.history.forward(1)
     }
 
 
@@ -134,6 +136,7 @@ class App extends React.Component{
             method: 'POST',
             body: {}
         })
+        console.log(result)
         if(result.data.userObj && result.data.userObj.personInfo) {
             this.setState({
                 headImg: result.data.userObj.personInfo.headImg,
@@ -177,16 +180,15 @@ class App extends React.Component{
     }
 
     routerHandle = (toUrl) => {
-        if (this.infoAllFilled())
-        {
-            this.activeTagHandle(toUrl)
-            location.href = toUrl
-        }
-        else{
-            this.props.router.push('/person')
-            window.toast("请先完成资料填写")
-        }
-
+        setTimeout(() => {
+            if (this.infoAllFilled()) {
+                this.activeTagHandle(toUrl)
+                location.href = toUrl
+            } else {
+                this.props.router.push('/person')
+                window.toast("请先完成资料填写")
+            }
+        },  100)
     }
 
     // 处理路由变化的时候高亮的tag
