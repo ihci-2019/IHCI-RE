@@ -21,7 +21,7 @@ export default class Members extends React.Component{
 
         //如果过了一定时间，后端数据还没全部取回来，则显示loading图标
         setTimeout(()=>{
-            if(!result.data){
+            if(!result){
                 this._page.loading.show(true)
             }
         },100)

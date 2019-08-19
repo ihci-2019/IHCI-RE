@@ -118,8 +118,7 @@ class App extends React.Component{
 
     componentWillMount = async() => {
         this.setHeadImg()
-        setTimeout(()=>{if (!(/team-join/.test(this.props.location.pathname)) && !this.infoAllFilled()){location.href = '/'}},100)
-        // window.history.forward(1)
+        setTimeout(()=>{if (!(/team-join/.test(this.props.location.pathname)) && !this.infoAllFilled()){window.history.forward(1)}},100)
     }
 
 
