@@ -46,6 +46,12 @@ const routerAuthJudge = async (req, res, next) => {
         res.redirect('/')
         return
     }
+    if(req.protocol == 'http'){
+        let host = req.headers.host;
+        host = host.replace(/\:\d+$/, ''); // Remove port number
+        res.redirect(`https://${host}${req.path}`);
+        return;
+    }
     next()
 }
 const wxJudge = async (req, res, next) => {
@@ -85,15 +91,31 @@ const test1 = async (req, res, next) => {
 
 // WARNING: 如果域名变更或者本地IP调试将会导致出错。
 const addwww = async (req, res, next) => {
-    console.log(req.url)
-    if(req.url.indexOf('www.')=== -1&&req.url.indexOf('localhost')!== -1){
-        res.redirect('https://www.animita.cn')
+    console.log(req)
+    if(req.host.indexOf('www.')=== -1){
+        let host = req.headers.host;
+        host = host.replace(/\:\d+$/, ''); // Remove port number
+        res.redirect(`https://www.${host}${req.path}`);
+        return;
     }
     else{
         next()
     }
 }
 const mainPage = async (req, res, next) => {
+    const userId = req.rSession.userId;
+    if(userId) {
+        let host = req.headers.host;
+        host = host.replace(/\:\d+$/, '');
+        res.redirect(`https://${host}/team`)
+        return;
+    }
+    if(req.protocol == 'http'){
+        let host = req.headers.host;
+        host = host.replace(/\:\d+$/, ''); 
+        res.redirect(`https://${host}${req.path}`);
+        return;
+    }
     const filePath = path.resolve(__dirname, '../../public/activity-react/main.html');
     const cccc = {
         ssdsds: '1',
@@ -176,7 +198,7 @@ const silentAuth = async(req, res, next) => {
         //静默授权
         var urlObj = url.parse(req.url,true)
         if(!req.rSession.userId&&!urlObj.query.code){
-            res.redirect(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx87136e7c8133efe3&redirect_uri=http%3A%2F%2Fwww.animita.cn${urlObj.pathname.substr(0,urlObj.pathname.length)}&response_type=code&scope=snsapi_base&state=123#wechat_redirect`)
+            res.redirect(`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx87136e7c8133efe3&redirect_uri=https%3A%2F%2Fwww.animita.cn${urlObj.pathname.substr(0,urlObj.pathname.length)}&response_type=code&scope=snsapi_base&state=123#wechat_redirect`)
         }
         if(!req.rSession.userId&&urlObj.query.code){
             var code = urlObj.query.code
@@ -249,7 +271,7 @@ const userAuthJudge = async(req, res, next) => {
 
 module.exports = [
     // 主页
-    ['GET', '/', clientParams(), silentAuth , mainPage , addwww],
+    ['GET', '/', clientParams(), silentAuth, addwww, mainPage],
     // ['GET', '/', clientParams(), mainPage],
     ['GET', '/activate', clientParams(), pageHandle()],
     //['GET','/wx-choose',clientParams(), pageHandle()],
@@ -276,7 +298,7 @@ module.exports = [
     ['GET', '/timeline', clientParams(), silentAuth,    routerAuthJudge, pageHandle() ],
     ['GET', '/member', clientParams(),   routerAuthJudge, pageHandle() ],
     ['GET', '/calendar/:teamId', clientParams(), pageHandle()],
-    ['GET', '/select-calendar', clientParams(), pageHandle()],
+    ['GET', '/select-calendar', clientParams(), routerAuthJudge, pageHandle()],
     ['GET', '/search', clientParams(),   routerAuthJudge, pageHandle() ],
     ['GET', '/completed/:id', clientParams(), silentAuth, routerAuthJudge, pageHandle() ],
     ['GET', '/inform', clientParams(),   routerAuthJudge, personSeting, pageHandle() ],
