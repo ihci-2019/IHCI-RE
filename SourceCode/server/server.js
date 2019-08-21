@@ -201,6 +201,18 @@ function init() {
     // 启用出错打印中间件
     app.use(error());
 
+    //https
+    if(conf.httpsEnable){
+        var https = require('https');
+        var credential = {
+            key:  fs.readFileSync(conf.httpsKey),
+            cert: fs.readFileSync(conf.httpsCert)
+        }
+        var httpsServer = https.createServer(credential, app);
+        httpsServer.listen(conf.httpsPort);
+    }
+    
+
     // 配置监听端口
     var serverOptions = [
         port,
@@ -209,7 +221,7 @@ function init() {
     // 配置监听host
     if (conf.host) {
         serverOptions.push(conf.host);
-    }
+    };
 
     // 监听回调
     serverOptions.push(function () {
@@ -218,8 +230,16 @@ function init() {
             process.kill(process.pid);
         });
     });
-
-    return app.listen(...serverOptions);
+    
+    //var http = require('http');
+    //var httpServer = http.createServer(app);
+    //httpServer.listen(...serverOptions);
+    if(conf.httpEnable){
+        app.listen(...serverOptions);
+    }
+    return app;
+    // return app.listen(...serverOptions);
+    // return httpsServer.listen(...serverOptions);
 }
 
 exports.app = app;
