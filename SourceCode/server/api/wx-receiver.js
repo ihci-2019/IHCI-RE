@@ -23,6 +23,8 @@ var subscribeEventHandle = async (openid) => {
     // 获取用户信息(拿uid)
     // 用uid查用户表（查到了 -》 添加uid, 改sub状态 -》发模板）
     try {
+        console.log("-----------------------------------------")
+        console.log(openid)
         const wxUserInfo = await pub_openidToUserInfo(openid)
         if(wxUserInfo && wxUserInfo.unionid) {
             const result = followerDB.findByUnionId(wxUserInfo.unionid)
@@ -101,7 +103,7 @@ var wxReceiver = function(req, res, next) {
     //       eventkey: [ '' ] } } 
 
     const event = req.body.xml && req.body.xml.event
-
+    console.log(req.body)
     switch (event) {
         case 'subscribe':
             subscribeEventHandle(req.body.xml.fromusername)
