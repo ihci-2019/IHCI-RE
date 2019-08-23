@@ -101,7 +101,6 @@ var wxReceiver = function(req, res, next) {
     //       eventkey: [ '' ] } } 
 
     const event = req.body.xml && req.body.xml.event
-
     switch (event) {
         case 'subscribe':
             subscribeEventHandle(req.body.xml.fromusername)

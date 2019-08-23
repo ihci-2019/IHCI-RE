@@ -160,7 +160,7 @@ export const createTopicTemplate = async function (userIdList, topicObj) {
             pub_pushTemplateMsg(
                 item.openid,
                 'p6pZBXX0SaqODRDZgY_3NqyIAK0mYN9HXYq6yMLyA04',
-                'http://www.animita.cn/discuss/topic/' + topicObj._id,
+                'https://www.animita.cn/discuss/topic/' + topicObj._id,
                 {
                     "first": {
                         "value": topicObj.creator.name + " 创建了讨论",
@@ -202,7 +202,7 @@ export const replyTopicTemplate = async function (userIdList, discussObj) {
             pub_pushTemplateMsg(
                 item.openid,
                 'p6pZBXX0SaqODRDZgY_3NqyIAK0mYN9HXYq6yMLyA04',
-                'http://www.animita.cn/discuss/topic/' + discussObj.topicId,
+                'https://www.animita.cn/discuss/topic/' + discussObj.topicId,
                 {
                     "first": {
                         "value": discussObj.creator.name + " 回复了讨论",
@@ -234,7 +234,7 @@ export const applyIntoTeam = async function (userIdList, userObj) {
             pub_pushTemplateMsg(
                 item.openid,
                 'p6pZBXX0SaqODRDZgY_3NqyIAK0mYN9HXYq6yMLyA04',
-                'http://www.animita.cn/discuss/topic/',
+                'https://www.animita.cn/discuss/topic/',
                 {
                     "first": {
                         "value": userObj.username + "申请加入团队",
@@ -267,7 +267,7 @@ export const admitIntoTeam = async function (userIdList, teamObj) {
             pub_pushTemplateMsg(
                 item.openid,
                 'p6pZBXX0SaqODRDZgY_3NqyIAK0mYN9HXYq6yMLyA04',
-                'http://www.animita.cn/discuss/topic/',
+                'https://www.animita.cn/discuss/topic/',
                 {
                     "first": {
                         "value": teamObj.name + "通过了你的申请",
@@ -292,7 +292,7 @@ export const closeToDDLTemplate = async function (headerList,taskObj){
             pub_pushTemplateMsg(
                 item.openid,
                 'p6pZBXX0SaqODRDZgY_3NqyIAK0mYN9HXYq6yMLyA04',
-                'http://www.animita.cn/todo/' + taskObj.id,
+                'https://www.animita.cn/todo/' + taskObj.id,
                 {
                     "first": {
                         "value": taskObj.title + " 即将到截止日期 "
@@ -318,7 +318,7 @@ export const createTaskTemplate = async function (headerList, taskObj, headernam
             pub_pushTemplateMsg(
                 item.openid,
                 'p6pZBXX0SaqODRDZgY_3NqyIAK0mYN9HXYq6yMLyA04',
-                'http://www.animita.cn/todo/' + taskObj.id,
+                'https://www.animita.cn/todo/' + taskObj.id,
                 {
                     "first": {
                         "value": taskObj.creator.name + " 将任务指派给 " + headername,
@@ -356,7 +356,7 @@ export const delTaskTemplate = async function (headerList, taskObj) {
             pub_pushTemplateMsg(
                 item.openid,
                 'p6pZBXX0SaqODRDZgY_3NqyIAK0mYN9HXYq6yMLyA04',
-                'http://www.animita.cn/todo/' + taskObj._id,
+                'https://www.animita.cn/todo/' + taskObj._id,
                 {
                     "first": {
                         "value": taskObj.creator.name + " 删除了任务",
@@ -389,7 +389,7 @@ export const delHeaderTemplate = async function (headerList, taskObj, headername
             pub_pushTemplateMsg(
                 item.openid,
                 'p6pZBXX0SaqODRDZgY_3NqyIAK0mYN9HXYq6yMLyA04',
-                'http://www.animita.cn/todo/' + taskObj._id,
+                'https://www.animita.cn/todo/' + taskObj._id,
                 {
                     "first": {
                         "value": taskObj.creator.name + " 取消了分配给" + headername + "的任务",
@@ -421,7 +421,7 @@ export const compTaskTemplate = async function (creatorId, taskObj , headername)
             pub_pushTemplateMsg(
                 item.openid,
                 'p6pZBXX0SaqODRDZgY_3NqyIAK0mYN9HXYq6yMLyA04',
-                'http://www.animita.cn/todo/' + taskObj._id,
+                'https://www.animita.cn/todo/' + taskObj._id,
                 {
                     "first": {
                         "value": headername + " 完成了任务",
@@ -456,7 +456,7 @@ export const createCheckitemTemplate = async function (headerList, checkitemObj,
             pub_pushTemplateMsg(
                 item.openid,
                 'p6pZBXX0SaqODRDZgY_3NqyIAK0mYN9HXYq6yMLyA04',
-                'http://www.animita.cn/todo/' + checkitemObj._id,
+                'https://www.animita.cn/todo/' + checkitemObj._id,
                 {
                     "first": {
                         "value": checkitemObj.creator.name + " 将检查项指派给" + headername,
@@ -488,7 +488,7 @@ export const delCheckitemTemplate = async function (headerList, checkitemObj) {
             pub_pushTemplateMsg(
                 item.openid,
                 'p6pZBXX0SaqODRDZgY_3NqyIAK0mYN9HXYq6yMLyA04',
-                'http://www.animita.cn/todo/' + checkitemObj._id,
+                'https://www.animita.cn/todo/' + checkitemObj._id,
                 {
                     "first": {
                         "value": checkitemObj.creator.username + " 删除了检查项",
@@ -521,7 +521,7 @@ export const delCheckHeaderTemplate = async function (headerList, checkitemObj, 
             pub_pushTemplateMsg(
                 item.openid,
                 'p6pZBXX0SaqODRDZgY_3NqyIAK0mYN9HXYq6yMLyA04',
-                'http://www.animita.cn/todo/' + checkitemObj._id,
+                'https://www.animita.cn/todo/' + checkitemObj._id,
                 {
                     "first": {
                         "value": checkitemObj.creator.name + " 取消了分配给" + headername + "的检查项",
@@ -553,7 +553,7 @@ export const compCheckitemTemplate = async function (creatorId, checkitemObj , h
             pub_pushTemplateMsg(
                 item.openid,
                 'p6pZBXX0SaqODRDZgY_3NqyIAK0mYN9HXYq6yMLyA04',
-                'http://www.animita.cn/todo/' + checkitemObj._id,
+                'https://www.animita.cn/todo/' + checkitemObj._id,
                 {
                     "first": {
                         "value": headername + " 完成了任务",
@@ -593,7 +593,7 @@ export const remindSchedule = async function (targetUsrId, sourceUsrId, schedule
             pub_pushTemplateMsg(
                 item.openid,
                 'yJSayd6CBNoEV9gQqGK-_U_VuBXDCFcY8axpxjY7ENw',
-                'http://www.animita.cn/calendar',
+                'https://www.animita.cn/calendar',
                 {
                     "first": {
                         "value": "你有一个新的日程提醒",
