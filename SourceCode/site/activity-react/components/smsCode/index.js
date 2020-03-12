@@ -4,7 +4,9 @@ import './style.scss'
 
 export default class SMSBlock extends React.Component{
     state = {
-        count: '',
+        //#1
+        //count: '',
+        count: 60,
         enable: true,
         number: 0,
         captchaCode:'',
@@ -14,20 +16,21 @@ export default class SMSBlock extends React.Component{
         captchCodeCheck:false,
     }
     componentDidMount = async () =>{
-        var dateEnd = new Date()
-        var dateBegin = new Date(window.sessionStorage.getItem('dateBegin'))
-        const count =  60-parseInt((dateEnd.getTime()- dateBegin.getTime())/1000)
-        this.setState({
-            count: count > 0? count: 60,
-            number:parseInt(window.sessionStorage.getItem('number'))|| 0,
-            numberCheck:window.sessionStorage.getItem('numberCheck') !==''?!window.sessionStorage.getItem('numberCheck'):true
+        //#1 注释了这一部分，代表不使用缓存来实现当用户跳到其他页面再跳回来时，验证码依旧有效，而是指直接重新来过
+        //var dateEnd = new Date()
+        //var dateBegin = new Date(window.sessionStorage.getItem('dateBegin'))
+        //const count =  60-parseInt((dateEnd.getTime()- dateBegin.getTime())/1000)
+        //this.setState({
+            //count: count > 0? count: 60,
+            //number:parseInt(window.sessionStorage.getItem('number'))|| 0,
+            //numberCheck:window.sessionStorage.getItem('numberCheck') !==''?!window.sessionStorage.getItem('numberCheck'):true
 
-        },()=>{
-            if(this.state.count !== 60){
-                this.countDown()
-            }
-            console.log(this.state.numberCheck)
-        })
+        //},()=>{
+            //if(this.state.count !== 60){
+                //this.countDown()
+            //}
+            //console.log(this.state.numberCheck)
+        //})
         this.getCaptchaImg()
         
     }
@@ -65,9 +68,10 @@ export default class SMSBlock extends React.Component{
                     }
                 })
                 
-                if(result.state.code === 0 ){
-                    var dateBegin = new Date()
-                    window.sessionStorage.setItem('dateBegin',dateBegin)
+                if(result.state.code === 0 ){//若成功发送验证码
+                    //#1
+                    //var dateBegin = new Date()
+                    //window.sessionStorage.setItem('dateBegin',dateBegin)
                     this.countDown()
                 }else{
                     window.toast(result.state.msg || "请重新输入")
@@ -81,22 +85,25 @@ export default class SMSBlock extends React.Component{
             }
     }
 }
+    //倒计时函数
     countDown = () =>{
+        //开始倒计时后，设置发送验证码按钮为不可点击
         this.setState({
             enable:false,
-            count:59
         })
         var timer = setInterval(() => {
             var count = this.state.count  
             count -=1
-            if(count < 1){
+            if(count < 1){//倒计时结束，重置
                 count = 60
                 this.setState({
                     enable: true,
                     count: count
-                },()=>{
-                    window.sessionStorage.removeItem('count')
                 })
+                    //#1
+                    //,()=>{
+                    //window.sessionStorage.removeItem('count')
+                //})
                 clearInterval(timer)
             }else{
                 this.setState({

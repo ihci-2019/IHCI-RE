@@ -81,7 +81,7 @@ class Page extends React.Component<IPageProps, IState> {
         }
 
         // Magic iPhone 微信需要通过加载 iframe 来刷新 title
-        if (Detect.os.ios && Detect.os.weixin) {
+        if ((Detect as any).os.ios && (Detect as any).os.weixin) {
             var iframe = document.createElement("iframe");
             iframe.setAttribute("src", "/favicon.ico");
             iframe.style.display = 'none';
