@@ -12,8 +12,10 @@ import ActivateMail from './activate-mail'
 import TeamJoin from './team-join'
 import WxCode from './wxcode'
 import WxChoose from './wx-choose'
-import IhciJoin from './ihci-join';
+import IhciJoin from './ihci-join'
 import PwdReset from './password-reset'
+import LoginPage from './login'
+import RegisterPage from './register'
 
 class App extends React.Component{
     state = {
@@ -342,6 +344,14 @@ const routeConfig = [
     {
         path: '/password-reset',
         component: PwdReset
+    },
+    {
+      path: '/login',
+      component: LoginPage
+    },
+    {
+      path: '/register',
+      component: RegisterPage
     }
 ]
 

@@ -136,36 +136,39 @@ export default class Person extends React.Component{
     usernameHandle = (e) => {
         const username = e.target.value;
         var illegalUsername = true;
-        /*
+        var usernameEmpty = false;
+
         if(username){
             usernameEmpty = false
         }else{
             usernameEmpty = true
-        }*/
+        }
         this.setState({  
             username: e.target.value,
             infoCheck:{
                 ...this.state.infoCheck,
                 illegalUsername:illegalUsername,
+                usernameEmpty: usernameEmpty,
             }
         })
     }
-    passwordHandle = (e) => {
+     passwordHandle = (e) => {
         const password = e.target.value
         var illegalPassword = true
-        /*
+        var passwordEmpty = false
+
         if(password){
             passwordEmpty = false
         }else{
             passwordEmpty = true
         }
-        */
+        
         this.setState({
             password: password,
             infoCheck:{
                 ...this.state.infoCheck,
                 illegalPassword:illegalPassword,
-                passwordEmpty:passwordEmpty
+                passwordEmpty: passwordEmpty,
             }
         })
     }
@@ -588,6 +591,11 @@ export default class Person extends React.Component{
         })
     }
     SaveUsenamePwdHandle = async () => {
+            //检测账号密码是否有为空的，有的话，就显示为空，没有则执行下面的语句
+            if(this.CheckUsernamePwdisEmpty()){
+                return
+            }
+            
             const result = await api('/api/user/fillUsernameAndPwd',{
                 method: 'POST',
                 body: {
@@ -607,6 +615,23 @@ export default class Person extends React.Component{
             }else{
                 window.toast(result.state.msg ||staticText.RESPONSE_MESSAGE.SET_FAIL)
             }
+    }
+
+    CheckUsernamePwdisEmpty = () => {
+        if(this.state.infoCheck.usernameEmpty){
+            // window.toast("用户名为空")
+            window.toast(staticText.PERSON_INFO_CHECK.CREATE_USERNAME_EMPTY);
+            return true;
+        }
+        if(this.state.infoCheck.passwordEmpty){
+            // window.toast("密码为空")
+            window.toast(staticText.PERSON_INFO_CHECK.CREATE_PASSWORD_EMPTY);
+            return true;
+        }
+
+        //账号密码都不为空，则返回false
+        return false;
+
     }
 
     getInfo = async() => {

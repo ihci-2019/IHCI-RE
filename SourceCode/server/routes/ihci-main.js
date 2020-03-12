@@ -256,6 +256,8 @@ module.exports = [
     ['GET','/wx-choose',clientParams(), wxJudge, pageHandle()],
     ['GET','/ihci-join',clientParams(), pageHandle()],
     ['GET','/password-reset',clientParams(),pageHandle()],
+    ['GET','/login',clientParams(),pageHandle()],
+    ['GET','/register',clientParams(),pageHandle()],
 
     ['GET', '/auth', clientParams(), wxAuthCodeHandle , mainPage],
 
