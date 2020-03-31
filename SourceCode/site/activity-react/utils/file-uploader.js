@@ -75,7 +75,7 @@ const getOssClient = async () => {
     const client = new OSSW({
         region: token.region,
         accessKeyId: token.AccessKeyId,
-        secure: false,
+        secure: true,
         accessKeySecret: token.AccessKeySecret,
         stsToken: token.SecurityToken,
         bucket: token.bucket,
