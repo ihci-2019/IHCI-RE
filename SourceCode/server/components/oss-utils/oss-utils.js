@@ -32,6 +32,7 @@ const getTempSTS = async function(session) {
     var token = await sts.assumeRole(roleArn, policy, 3600, session)
     token.credentials.region = conf.ossConf.region
     token.credentials.bucket = conf.ossConf.bucket
+    token.credentials.secure = conf.ossConf.secure
 
     return token.credentials
 }
@@ -64,6 +65,7 @@ const ossUpDate = async function(session) {
     var token = await sts.assumeRole(roleArn, policy, 3600, session)
     token.credentials.region = conf.ossConf.region
     token.credentials.bucket = conf.ossConf.bucket
+    token.credentials.secure = conf.ossConf.secure
 
     return token.credentials
 }
