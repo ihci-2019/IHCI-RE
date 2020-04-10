@@ -71,6 +71,10 @@ export class LoginView extends React.Component {
         } else {
             usernameEmpty = true
         }
+        // WH_DOING，限制只能输入数字
+        if (!(/^[0-9]*$/.test(username))) {
+            return
+        }
         this.setState({
             username: e.target.value,
             infoCheck: {
@@ -104,6 +108,10 @@ export class LoginView extends React.Component {
         } else {
             createPhoneEmpty = true
         }
+        // WH_DOING，限制只能输入数字
+        if (!(/^[0-9]*$/.test(createPhone))) {
+            return
+        }
         this.setState({
             createPhone: createPhone,
             infoCheck: {
@@ -134,7 +142,7 @@ export class LoginView extends React.Component {
         if (confirmPassword) {
             createPasswordEmpty = false
         } else {
-            createPassworddEmpty = true
+            createPasswordEmpty = true
         }
         this.setState({
             createPassword: e.target.value,
@@ -145,7 +153,8 @@ export class LoginView extends React.Component {
         })
     }
 
-    loginHandle = async () => {
+    loginHandle = async (e) => {
+        e.preventDefault();
         if (this.state.infoCheck.usernameEmpty) {
             window.toast("用户名为空")
             return
@@ -164,7 +173,8 @@ export class LoginView extends React.Component {
         }
     }
 
-    signHandle = async () => {
+    signHandle = async (e) => {
+        e.preventDefault();
         // todo 检验账号密码是否可用
         if (this.state.infoCheck.createPhoneEmpty) {
             window.toast("手机为空")
@@ -236,7 +246,9 @@ export class LoginView extends React.Component {
             {
                 this.state.loginBlock == "signUp" ?
                     <div className='login-view-form'>
-                        <input type="number" pattern="[0-9]*" className="auth-input" placeholder="请输入手机号"
+
+                    <form onSubmit={this.signHandle}>
+                        <input pattern="[0-9]*" className="auth-input" placeholder="请输入手机号"
                             value={this.state.createPhone} onChange={this.createPhoneHandle}
                             onClick={this.judgeUsernameEmptyHandle} autoFocus></input>
                         <input type='text' className='auth-input' placeholder='请输入昵称' 
@@ -261,19 +273,25 @@ export class LoginView extends React.Component {
                             </ul>
                         </div>
                         }
-                        <div className="submit-btn" onClick={this.signHandle}>加入我们</div>
+                        <button className="submit-btn" >加入我们</button>
+                    </form>
+
                     </div>
                     : ""
             }
             {
                 this.state.loginBlock == "login" ?
                     <div className='login-view-form'>
+
+                    <form onSubmit={this.loginHandle}>
                         <div className="auth-desc">用户名</div>
-                        <input type="number" pattern="[0-9]*" className="auth-input" value={this.state.username} onChange={this.usernameHandle}></input>
+                        <input pattern="[0-9]*" className="auth-input" placeholder="请输入手机号" value={this.state.username} onChange={this.usernameHandle} autoFocus></input>
                         <div className="auth-desc">密码</div>
-                        <input className="auth-input" type="password" value={this.state.password} onChange={this.passwordHandle}></input>
+                        <input className="auth-input" type="password" placeholder="请输入密码" value={this.state.password} onChange={this.passwordHandle}></input>
                         <div className="forgetPwd" onClick={this.forgetPwd}>忘记密码?</div>
-                        <div className="submit-btn" onClick={this.loginHandle}>加入我们</div>
+                        <button className="submit-btn" >加入我们</button>
+                    </form>
+                    
                         <div className="wx-submit-btn" onClick={this.props.showWxDialogHandle}>
                             <img className="wx-submit-img" src={require('./wechat@2x.png')} />
                             微信登录

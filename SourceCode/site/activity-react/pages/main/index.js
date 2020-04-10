@@ -9,19 +9,22 @@ import './style.scss'
 import '../../commen/style.scss'
 
 import WxLoginDialog from '../../components/wx-login-dialog'
-import { LoginView } from '../../components/login-view';
+// import { LoginView } from '../../components/login-view';
+import { SignView } from '../../components/sign';
+
+import Slider from "react-slick";
 
 export default class MainPage extends React.Component {
     
     state = {
         //loginBlock: signUp || login
-        loginBlock: "login",
+        // loginBlock: "login",
 
-        username: '',
-        password: '',
+        // username: '',
+        // password: '',
 
-        createUsername: '',
-        createPassword: '',
+        // createUsername: '',
+        // createPassword: '',
 
         showWxDialog: false,
     }
@@ -58,43 +61,84 @@ export default class MainPage extends React.Component {
         })
     }
 
+    login = async () => {
+      setTimeout(() => {
+          location.href = '/login'
+      }, 300);
+    }
+
+    register = async () => {
+      setTimeout(() => {
+          location.href = '/register'
+      }, 300);
+    }
+
+    toHomePage = async () => {
+      setTimeout(() => {
+          location.href = '/'
+      }, 100);
+    }
+
     render () {
-        return <Page title='IHCI' className="main-page">
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+      return ( 
+        <Page title='IHCI' className="main-page">
+    
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
             {
-                this.state.showWxDialog && <WxLoginDialog state="auth" closeHandle={this.hideWxDialogHandle}/>
+              this.state.showWxDialog && <WxLoginDialog state="auth" closeHandle={this.hideWxDialogHandle}/>
             }
-
+            
             <div className="nav">
                 <div className="max-w-con nav-con">
-                    <img className="logo" src={require('./logo@2x.png')} />
-                    <div className="slogan">
+                    <img className="logo" src={require('./logo.png')} onClick={this.toHomePage}/>
+                    {/* <div className="slogan">
                             <div className="english">All for the valuable code</div> 
-                            <div className="chinese">一切为了有价值的代码</div></div>
+                            <div className="chinese">一切为了有价值的代码</div>
+                    </div> */}
                     <div className="division">iHCI俱乐部&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iHCI实验室</div>
+                    <div className="sign">
+                      <div className="signin" onClick={this.login}>登陆</div>
+                      <div className="signup" onClick={this.register}>注册</div>
+                    </div>
                 </div>
             </div>
+
             <div className="banner">
                 <div className="banner-con">
-                    <div className="img-wrap"><img className="banner-img" src={require('./tuceng7@2x.png')} /></div>
-                    <div className="note">&nbsp;&nbsp;Join a TEAM；<br/> &nbsp;&nbsp;prove YOUR VALUE;<br/>
-                                         &nbsp;&nbsp;design and code<br/> &nbsp;&nbsp;for the USERS' VALUE </div>
-                    <LoginView showWxDialogHandle={this.showWxDialogHandle}/>
+                    {/* <div className="img-wrap"><img className="banner-img" src={require('./tuceng7@2x.png')} /></div> */}
+                    <div className="img-wrap"><img className="banner-img1" src={require('./tuceng1.png')} /></div>
+                    <div className="img-wrap"><img className="banner-img2" src={require('./tuceng2.jpg')} /></div>
+                    <div className="img-wrap"><img className="banner-img3" src={require('./tuceng3.jpg')} /></div>
+                    <div className="img-wrap"><img className="banner-img4" src={require('./tuceng4.jpg')} /></div>
+                    <div className="img-wrap"><img className="banner-img5" src={require('./tuceng5.jpg')} /></div>
+                    <div className="img-wrap"><img className="banner-img6" src={require('./tuceng6.jpg')} /></div>
+                    {/* <div className="note">&nbsp;&nbsp;Join a TEAM；<br/> &nbsp;&nbsp;prove YOUR VALUE;<br/>
+                                         &nbsp;&nbsp;design and code<br/> &nbsp;&nbsp;for the USERS' VALUE </div> */}
+                    {/* <LoginView showWxDialogHandle={this.showWxDialogHandle}/> */}
+                    <SignView sign="login" showWxDialogHandle={this.showWxDialogHandle} />
                 </div>
             </div>
-            {/* <iframe id="iframeId"  ref="iframeRef"  className="iframeTest" src="http://39.108.68.159:5001/"   ></iframe> */}
+
+            <img className="transition" src={require('./background.svg')}></img>
+
+            <div className="slogan">一切为了有价值的代码</div>
+            <div className="text">
+              <div className="first">起初，我们的目标是：帮助学生学习如何组建软件团队，为用户编写有价值的代码。</div>
+              <div className="second">10年来，我们创建了iHCI平台，持续不断地完善这个目标。</div>
+            </div>
+
             <div className="video">
-                <img className="video-title" src={require('./team-video.png')}/>
-                <div className="video-wrap">
-                    { /* <iframe frameborder="0" width="450" height="254" src="https://v.qq.com/iframe/player.html?vid=f0564fwe5va&tiny=0&auto=0" allowfullscreen></iframe> */}
-                    <img className="video-template" src={require('./mp4.png')}/>
-                    <div className="video-des">这是一些关于视频的描述balabala</div>
-                </div>
-                
+                {/* <img className="video-title" src={require('./team-video.png')}/> */}
+                <div className="video-title">&nbsp;&nbsp;&nbsp;&nbsp;团队动态</div>
+                <div className="video-wrap">   
+                    <img className="video-template" src={require('./team1.png')}/>
+                </div>        
             </div>
+
             <div className="stories">
-                <div className="story-title">团队成员故事</div>
+                <div className="story-title">
+                  <div className="p1">团队成员故事</div>
+                </div>
                 <div className="story-con">
                     <div className="story-item" id="first-item">
                         <img  className="head-img" src={require('./toxiang1.png')}/>
@@ -133,77 +177,84 @@ export default class MainPage extends React.Component {
                         </div>
                     </div>
                 </div>
-                {window.outerWidth>550?<div className="join-num">
-                    <div className="p1">迄今已有</div>
-                    <div className="num">450人</div>
+                { 
+                  window.outerWidth > 550 ?
+                  <div className="join-num">
+                    <div className="p1">迄今已有450人</div>
+                    {/* <div className="num">450人</div> */}
                     <div className="p1">加入了IHCI</div>
-                </div>:<div className="join-num">
-                    <span className="p1">迄今已有</span>
-                    <span className="num">450人</span>
+                  </div>
+                  :
+                  <div className="join-num">
+                    <span className="p1">迄今已有450人</span>
+                    {/* <span className="num">450人</span> */}
                     <span className="p1">加入了IHCI</span>
-                </div>}
-                
+                </div>}              
             </div>
+
+            {/* <div className="deco1">
+              <div></div>
+
+            </div> */}
+
             <div className="footer">
-            <div className="trademark">
-        <img className="logo" src={require('./logo@2x.png')} />
-        <div className="trademark-text">川 B2-20130052 蜀 ICP 备 12019256号-5</div>
-        <div className="trademark-footer">©️ Mycolorway Design.</div>
-        </div>
-            {window.outerWidth>600?
+              <div className="trademark">
+                {/* <img className="logo" src={require('./logo@2x.png')} /> */}
+                <div className="trademark-text"><a href="http://www.beian.miit.gov.cn" target="_blank">粤ICP备15032454号-2</a></div>
+                <div className="trademark-footer">©️2009-至今 广州无象数码科技有限公司版权所有</div>
+              </div>
+              {
+                window.outerWidth > 600 ?
             
-            <div className="footer-list max-w-con">
-                <div className="foot-item">
-                    <div className="foot-item-title">IHCI</div>
-                    <div href="">关于我们</div>
-                    <div href=""><img className="wx" width='20px' height="20px" src={require('./wechat@2x.png')} /></div>
+                <div className="footer-list max-w-con">
+                    <div className="foot-item">
+                        <div className="foot-item-title">IHCI</div>
+                        <div href="">关于我们</div>
+                        <div href=""><img className="wx" width='20px' height="20px" src={require('./wechat@2x.png')} /></div>
+                    </div>
+                    <div className="foot-item">
+                        <div className="foot-item-title">iHCI俱乐部</div>
+                        <div href="">HTML&CSS</div>
+                        <div href="">JavaScript</div>
+                        <div href="">Python</div>
+                    </div>
+                    <div className="foot-item">
+                        <div className="foot-item-title">iHCI实验室</div>
+                        <div href="">软件工程</div>
+                        <div href="">人机交互</div>
+                        <div href="">人工智能</div>
+                    </div>
                 </div>
-                <div className="foot-item">
-                    <div className="foot-item-title">iHCI俱乐部</div>
-                    <div href="">HTML&CSS</div>
-                    <div href="">JavaScript</div>
-                    <div href="">Python</div>
-                </div>
-                <div className="foot-item">
-                    <div className="foot-item-title">iHCI实验室</div>
-                    <div href="">软件工程</div>
-                    <div href="">人机交互</div>
-                    <div href="">人工智能</div>
-                </div>
-            </div>
-        :
-                
+                :
                 <div className="footer-list max-w-con">
                     <div className="foot-item">
                         <div className="foot-item-title">iHCI俱乐部</div>
                         <div className="foot-item-title">iHCI实验室</div>
-                        <div className="foot-item-title">IHCI</div>
-                        
+                        <div className="foot-item-title">IHCI</div>                      
                     </div>
-                    <div className="foot-item">
-                        
+
+                    <div className="foot-item">                      
                         <div href="">HTML&CSS</div>
                         <div href="">人工智能</div>
-                        <div href="">关于我们</div>
-                        
-                       
+                        <div href="">关于我们</div>            
                     </div>
+
                     <div className="foot-item">
                         <div href="">JavaScript</div>
-                        <div href="">软件工程</div>
-                        
-                        
+                        <div href="">软件工程</div>                      
                     </div>
+
                     <div className="foot-item">
                         <div href="">Python</div>
-                        <div href="">人机交互</div>
-                        
+                        <div href="">人机交互</div>                       
                     </div>
                 </div>
-            }
+              }
+          </div>
+  
         
-        </div>
         </Page>
+      )
     }
 }
 

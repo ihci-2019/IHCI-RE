@@ -53,7 +53,16 @@ export default class Team extends React.Component{
     }
 
     initTeamList = async () => {
-        const result = await api('/api/getMyInfo', {
+        let result = null
+        let listResult = null
+        //如果过了一定时间，后端数据还没全部取回来，则显示loading图标
+        setTimeout(()=>{
+            if(!(listResult&&result)){            
+                this._page.loading.show(true)    
+            }
+        },100)
+
+        result = await api('/api/getMyInfo', {
             method: 'POST',
             body: {}
         })
@@ -64,7 +73,7 @@ export default class Team extends React.Component{
             teamIdList.push(item.teamId)
         })
 
-        const listResult = await api('/api/team/infoList', {
+        listResult = await api('/api/team/infoList', {
             method: 'POST',
             body: {
                 teamIdList: teamIdList
@@ -83,6 +92,9 @@ export default class Team extends React.Component{
         this.setState({
             teamList: teamList
         })
+        //已取回全部后端数据，关闭loading图标
+        this._page.loading.show(false)
+
     }
 
     starHandle = async (_id) => {
@@ -127,10 +139,13 @@ export default class Team extends React.Component{
     }
     render() {
         return (
-            <Page title="团队 - IHCI" className="team-page">
+            <Page title="团队 - IHCI" className="team-page" ref={page => this._page = page}>
                 <div className="page-wrap">
                     <div className="main">
-                        <div className="carete" onClick={() => {this.locationTo('/team-create')}}> 创建团队 </div>
+                        <div className="create" onClick={() => {this.locationTo('/team-create')}}> 创建团队</div>
+                        {/* LHJ_DOING 把 退出团队 按钮放到 team 页面的创建团队下面  */}
+                        <div className="seg">  | </div> 
+                        <div className="quit" onClick={() => {location.href = '/team-management'}}>退出团队</div>
                         <div className="head" onClick={this.starHandle}>星标团队</div>
                         <div className="team-list">
                             {   

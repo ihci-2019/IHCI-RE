@@ -1,6 +1,31 @@
 .team-page {
     padding: 0.4rem 0;
-    .carete {
+    .create {
+        cursor: pointer;
+        right: 160px;
+        top: 80px;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        font-size: 22px;
+        color: #666;
+        // LHJ_DOING “创建团队&退出团队不加粗”
+        //font-weight: bold;
+        &:hover{
+            color:#444;
+        }
+    }
+    // FWH 强迫症改分割线
+    .seg {
+        right: 152px;
+        top: 80px;
+        position: absolute;
+        font-size: 22px;
+        color: #666;
+    }
+    // LHJ 设置“退出团队”样式
+    .quit {
         cursor: pointer;
         right: 60px;
         top: 80px;
@@ -10,21 +35,25 @@
         justify-content: flex-end;
         font-size: 22px;
         color: #666;
-        font-weight: bold;
         &:hover{
             color:#444;
         }
     }
     .main{
-        padding: 0.4rem 0.4rem;
+        padding: 0.4rem 0.4rem;        
     }
     .act {
         color: red;
     }
 
     .head {
-        font-weight: bold;
-        font-size: 20px;
+        // WH_DOING
+        // font-weight: bold;
+        // font-size: 20px;
+        // padding: 40px 0;
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: 1px;
         padding: 40px 0;
     }
 

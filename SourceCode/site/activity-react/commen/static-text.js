@@ -60,6 +60,8 @@ const Person = {
         CREATE_NAME_ILLEGAL: "加入iHCI要求实名",
         CREATE_MAIL_ILLEGAL: "格式错误,请填写正确格式的邮件地址",
         CREATE_PHONE_ILLEGAL: "格式错误,请填写正确格式的电话号码",
+        CREATE_USERNAME_EMPTY: "账号为空",
+        CREATE_PASSWORD_EMPTY: "密码为空",
 
 
     },

@@ -17,7 +17,16 @@ export default class Members extends React.Component{
     }
 
     initMemberList = async (id) => {
-        const result = await api('/api/member', {
+        let result = null
+
+        //如果过了一定时间，后端数据还没全部取回来，则显示loading图标
+        setTimeout(()=>{
+            if(!result){
+                this._page.loading.show(true)
+            }
+        },100)
+
+        result = await api('/api/member', {
             method: 'POST',
             body: id ? {
                 teamId : id
@@ -26,6 +35,9 @@ export default class Members extends React.Component{
         this.setState({ 
             memberList: result.data
         })
+        //已取回全部后端数据，关闭loading图标
+        this._page.loading.show(false)
+
     }
 
     loadMoreHandle = () => { 
@@ -95,7 +107,7 @@ export default class Members extends React.Component{
 
     render() {
         return (
-            <Page title={"成员 - IHCI"} className="member-page">
+            <Page title={"成员 - IHCI"} className="member-page" ref={page => this._page = page}>
                 <div className="page-wrap">
                     <div className="teamList">
                         <div className={this.state.activeTag == "all" ? "act team-tag-item" : "team-tag-item"} onClick={this.toTeamHandle.bind(this, null,null)}>全部</div>

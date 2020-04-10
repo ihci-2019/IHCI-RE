@@ -2,7 +2,7 @@ import * as React from 'react';
 import './style.scss'
 import Page from '../../../components/page'
 import api from '../../../utils/api';
-import { timeBefore, createMarkup } from '../../../utils/util'
+import { timeBefore, createMarkup, sortByCreateTime} from '../../../utils/util'
 import Editor from '../../../components/editor'
 import fileUploader from '../../../utils/file-uploader'
 import MemberChosenList from '../../../components/member-chose-list'
@@ -144,14 +144,17 @@ export default class Topic extends React.Component{
     }
 
     topicContentHandle = (content) => {
-      
+        // WH_DOING
         this.setState({
-            topicContentInput: content
+            topicContentInput: content.replace(new RegExp('<p></p>', 'g'), '<br />')
         })
     }
     discussContentHandle = (content) => {
+        // WH_DOING
+        // console.log(content)
+        // console.log(content.replace(new RegExp('<p></p>', 'g'), '<br />'))
         this.setState({
-            createDiscussContent: content
+            createDiscussContent: content.replace(new RegExp('<p></p>', 'g'), '<br />')
         })
     }
 
@@ -484,7 +487,7 @@ export default class Topic extends React.Component{
                             </div>
                         :
                             <div className="topic-subject-con">
-                                <div className="topic-title">{this.state.topicObj.title}</div>
+                                <div className="topic-title">{this.state.topicObj.title} 讨论</div>
                                 <div className="flex">
                                     <img className="head-img" id = "image" src={this.state.topicObj.creator.headImg} onClick={this.toTimeLineHandle.bind(this,this.state.topicObj.creator.id)}></img>
                                     <div className="topic-main">
@@ -530,26 +533,6 @@ export default class Topic extends React.Component{
 
                     <div className="div-line"></div>
 
-                    <div className="topic-list">
-                    {
-                        this.state.discussList.map((item) => {
-                            return (
-                                <TopicDiscussItem 
-                                    id={"topic-discuss-item-" + item._id} 
-                                    onBlur={() => this.undoHighlight()} key={"topic-discuss-item-" + item._id} 
-                                    enableHighlight={this.state.enableHighlight} 
-                                    highlight={!!this.props.location.state && this.props.location.state.id == item._id? true : false} 
-                                    allowEdit={this.props.personInfo._id == item.creator._id} {...item} 
-                                    saveEditHandle = {this.saveDiscussEditHandle}
-                                    downloadHandle = {this.downloadHandle}
-                                    memberList = {this.state.memberList}
-                                    memberChoseHandle = {this.memberChoseHandle.bind(this)}
-                                    toTimeLineHandle = {this.toTimeLineHandle.bind(this)}
-                                />
-                            )
-                        })
-                    }
-
                     <div className="topic-subject-con discuss-con">
                         <div className="flex">
                             <img className="head-img" src={this.props.personInfo && this.props.personInfo.headImg}></img>
@@ -573,12 +556,34 @@ export default class Topic extends React.Component{
                                         </div>
                                         :
                                         <div className='topic-subject-edit no-pading'>
-                                            <input placeholder={"点击发表评论"} type="text" onClick={() => {this.setState({createDiscussChosen: true})}} className="topic-title"/>
+                                            <input placeholder={"点击发表评论"} type="text" onClick={() => {this.setState({createDiscussChosen: true})}} className="topic-title" />
                                         </div>
                                 }
                             </div>
                         </div>
                     </div>
+                    
+                    <div className="div-line"></div>
+
+                    <div className="topic-list">
+                    {
+                        sortByCreateTime(this.state.discussList).map((item) => {
+                            return (
+                                <TopicDiscussItem 
+                                    id={"topic-discuss-item-" + item._id} 
+                                    onBlur={() => this.undoHighlight()} key={"topic-discuss-item-" + item._id} 
+                                    enableHighlight={this.state.enableHighlight} 
+                                    highlight={!!this.props.location.state && this.props.location.state.id == item._id? true : false} 
+                                    allowEdit={this.props.personInfo._id == item.creator._id} {...item} 
+                                    saveEditHandle = {this.saveDiscussEditHandle}
+                                    downloadHandle = {this.downloadHandle}
+                                    memberList = {this.state.memberList}
+                                    memberChoseHandle = {this.memberChoseHandle.bind(this)}
+                                    toTimeLineHandle = {this.toTimeLineHandle.bind(this)}
+                                />
+                            )
+                        })
+                    }
                     </div>
                 </div>
             </Page>
