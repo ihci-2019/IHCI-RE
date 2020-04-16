@@ -55,6 +55,7 @@
     }
 
     .file-list {
+        margin:5px;
         .file-line {
             display: flex;
             align-items: center;
@@ -88,7 +89,7 @@
         }
         //LHJ_DOING  修改文件夹 大小、修改时间的样式
         .name {
-            width: 50%;
+            width: 45%;
             font-size:20px;
         }
         .size {
@@ -101,7 +102,7 @@
         }
         //LHJ_DOING 移动、重命名、删除..
         .tools {
-            width: 20%;
+            width: 25%;
             font-size:18px;
             span {
                 margin-right: 10px;
@@ -206,7 +207,7 @@
             white-space: nowrap;
         }
         .name {
-            width: 50%;
+            width: 45%;
             
         }
         .size {
@@ -216,7 +217,7 @@
             width: 15%;
         }
         .tools {
-            width: 20%;
+            width: 25%;
             span {
                 margin-right: 10px;
                 &:hover {

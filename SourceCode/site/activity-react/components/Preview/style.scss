@@ -1,0 +1,28 @@
+.preview {
+    z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 50px;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &-container {
+      position: relative;
+      z-index: 1000;
+    width: 1000px;
+    //height: auto;
+    height: 90%;
+    padding: 25px;
+    background: #fff;
+    box-sizing: border-box;
+    .image {
+      width: 100%;
+      height: auto;
+    }
+  }
+}

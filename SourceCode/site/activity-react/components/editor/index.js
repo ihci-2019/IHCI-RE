@@ -2,13 +2,39 @@ import * as React from 'react';
 import BraftEditor from 'braft-editor'
 import './braft.scss'
 import './style.scss'
+import fileUploader from '../../utils/file-uploader'
+import {
+    create
+} from '../../../../server/components/uuid/uuid'
 
 export default class Beditor extends React.Component{
 
     openFileInput = () => {
         this.fileInput.click()
     }
+    //由于图片上传、 视频上传项目中都是单独走的接口， 需要一个上传的方法
+   async myUploadFn (param){
 
+         console.log('param',param);
+         var nameParts = param.file.name.split('.')
+         var ossKey =  '/imageStatic/' + create() + '.' + nameParts[nameParts.length - 1]
+         const resp = await fileUploader(param.file, ossKey)
+         console.log(resp.name)
+         console.log(window.location.origin)
+         param.success({
+             url: window.location.origin+'/static' + resp.name,
+             meta: {
+                 id: ossKey,
+                 title: resp.name,
+                 alt: resp.name,
+                 loop: false, // 指定音视频是否循环播放
+                 autoPlay: false, // 指定音视频是否自动播放
+                 controls: false, // 指定音视频是否显示控制栏
+                 poster: '', // 指定视频播放器的封面
+             }
+         })
+
+    };
     render() {
         const _props = this.props
 
@@ -43,7 +69,15 @@ export default class Beditor extends React.Component{
                        onChange={_props.handleFileUpload}>
                 </input>
 
-                <BraftEditor {...editorProps} />
+                < BraftEditor {
+                    ...editorProps
+                }
+                media = {
+                    {
+                        uploadFn: this.myUploadFn
+                    }
+                }
+                />
 
                 <div className="editor-file-list">
                     {

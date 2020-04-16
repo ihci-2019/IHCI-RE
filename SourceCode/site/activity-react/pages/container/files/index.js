@@ -7,11 +7,7 @@ import api from '../../../utils/api';
 import Page from '../../../components/page'
 import fileUploader from '../../../utils/file-uploader';
 import Modal from '../../../components/modal'
-
-
-
-const root = document.getElementById('app')
-
+import Preview from '../../../components/Preview'
 export default class Files extends React.Component {
     componentDidMount = async () => {
         this.teamId = this.props.params.id
@@ -32,6 +28,9 @@ export default class Files extends React.Component {
         dirList: [],
         modal: document.createElement('div'),
         moveItem: '',
+        modalIsOpen:false,
+        currentFile:"",
+        currentType:null,
     }
 
     initDirList = () => {
@@ -93,7 +92,6 @@ export default class Files extends React.Component {
             })
         }
     }
-
     createFolderHandle = async () => {
         this.setState({ showCreateFolder: true })
     }
@@ -261,9 +259,40 @@ export default class Files extends React.Component {
     }
 
     downloadHandle = (ossKey) => {
+         console.log(window.location.origin + '/static/' + ossKey)
         window.open(window.location.origin + '/static/' + ossKey)
     }
-
+    previewHandle(ossKey) {
+        let file = window.location.origin + '/static/' + ossKey;
+        let type = file.split(".").pop()
+        // if (type=="pdf"){
+        //     this.setState({
+        //         currentFile: file,
+        //         currentType: 'pdf',
+        //     })
+        // } else if (type == 'jpg' || type == 'png' || type == 'jpeg' || type == 'gif' || type == 'webp'){
+        //     this.setState({
+        //     currentFile: file,
+        //     currentType: "image",
+        //     })
+        // }else{
+        //     return;
+        // }
+        this.setState({
+            currentFile: file,
+            currentType: type,
+        })
+        this.setState({
+            modalIsOpen:true
+        })
+    }
+    onClose = (result) => {
+         console.log(result)
+        // 很奇怪这里的result就是子组件那bind的第一个参数this，msg是第二个参数
+        this.setState({
+            modalIsOpen: false
+        })
+    }
     headDirClickHandle = (dir) => {
         if (dir == '/') {
             this.curDir = '/'
@@ -350,7 +379,11 @@ export default class Files extends React.Component {
     }
 
     render() {
+        const {
+            modalIsOpen
+        } = this.state;
         return (
+            <React.Fragment>
             <Page title="文件" className="file-page">
                 <div className="return" onClick={()=>{location.href = '/team/'+this.teamId}}>
                         <div className="teamName">{this.state.teamInfo.name}</div>
@@ -440,6 +473,7 @@ export default class Files extends React.Component {
                                                 <div className="size">{item.size}</div>
                                                 <div className="last-modify">{formatDate(item.last_modify_time)}</div>
                                                 <div className="tools">
+                                                    < span onClick = {() => {this.previewHandle(item.ossKey)}} >预览</span>
                                                     <span onClick={() => { this.downloadHandle(item.ossKey) }}>下载</span>
                                                     <span onClick={() => { this.openMoveModalHandle(item) }}>移动</span>
                                                     <span onClick={() => { this.renameHandle(item) }}> 重命名 </span>
@@ -454,11 +488,13 @@ export default class Files extends React.Component {
 
                     </div>
                 </div>
-
-
             </Page>
+             {modalIsOpen ? (
+             <Preview url={this.state.currentFile} type={this.state.currentType} onClose={this.onClose}></Preview>
+          ) : null}
+           
+            </React.Fragment>
         )
     }
 }
-
 
