@@ -263,7 +263,9 @@ class App extends React.Component{
                         onMouseOver={this.handleQuitMouseOver} onMouseOut={this.handleQuitMouseOut}>退出</div>
                     </div>
                     {/* WH_DOING */}
-                    <div className="logo">这是LOGO</div>
+                    <div className="logo">
+                        < img src = 'https://ihci.oss-cn-beijing.aliyuncs.com/home/logo.png' / >
+                    </div>
                     <div className="center">
                         <div className="nav-list">
                             <span className={this.state.activeTag == 'team' ? 'nav-item active' : 'nav-item'} onClick={this.routerHandle.bind(this, '/team')}>团队</span>

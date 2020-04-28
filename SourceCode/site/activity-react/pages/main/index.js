@@ -27,6 +27,7 @@ export default class MainPage extends React.Component {
         // createPassword: '',
 
         showWxDialog: false,
+        staticUrl: 'https://ihci.oss-cn-beijing.aliyuncs.com/home/'
     }
     data = {
 
@@ -90,7 +91,7 @@ export default class MainPage extends React.Component {
             
             <div className="nav">
                 <div className="max-w-con nav-con">
-                    <img className="logo" src={require('./logo.png')} onClick={this.toHomePage}/>
+                    <img className="logo" src={`${this.state.staticUrl}logo.png`} onClick={this.toHomePage}/>
                     {/* <div className="slogan">
                             <div className="english">All for the valuable code</div> 
                             <div className="chinese">一切为了有价值的代码</div>
@@ -106,12 +107,12 @@ export default class MainPage extends React.Component {
             <div className="banner">
                 <div className="banner-con">
                     {/* <div className="img-wrap"><img className="banner-img" src={require('./tuceng7@2x.png')} /></div> */}
-                    <div className="img-wrap"><img className="banner-img1" src={require('./tuceng1.png')} /></div>
-                    <div className="img-wrap"><img className="banner-img2" src={require('./tuceng2.jpg')} /></div>
-                    <div className="img-wrap"><img className="banner-img3" src={require('./tuceng3.jpg')} /></div>
-                    <div className="img-wrap"><img className="banner-img4" src={require('./tuceng4.jpg')} /></div>
-                    <div className="img-wrap"><img className="banner-img5" src={require('./tuceng5.jpg')} /></div>
-                    <div className="img-wrap"><img className="banner-img6" src={require('./tuceng6.jpg')} /></div>
+                    <div className="img-wrap"><img className="banner-img1" src={`${this.state.staticUrl}tuceng1.png`} /></div>
+                    <div className="img-wrap"><img className="banner-img2" src={`${this.state.staticUrl}tuceng2.jpg`} /></div>
+                    <div className="img-wrap"><img className="banner-img3" src={`${this.state.staticUrl}tuceng3.jpg`} /></div>
+                    <div className="img-wrap"><img className="banner-img4" src={`${this.state.staticUrl}tuceng4.jpg`} /></div>
+                    <div className="img-wrap"><img className="banner-img5" src={`${this.state.staticUrl}tuceng5.jpg`} /></div>
+                    <div className="img-wrap"><img className="banner-img6" src={`${this.state.staticUrl}tuceng6.jpg`} /></div>
                     {/* <div className="note">&nbsp;&nbsp;Join a TEAM；<br/> &nbsp;&nbsp;prove YOUR VALUE;<br/>
                                          &nbsp;&nbsp;design and code<br/> &nbsp;&nbsp;for the USERS' VALUE </div> */}
                     {/* <LoginView showWxDialogHandle={this.showWxDialogHandle}/> */}
@@ -131,7 +132,7 @@ export default class MainPage extends React.Component {
                 {/* <img className="video-title" src={require('./team-video.png')}/> */}
                 <div className="video-title">&nbsp;&nbsp;&nbsp;&nbsp;团队动态</div>
                 <div className="video-wrap">   
-                    <img className="video-template" src={require('./team1.png')}/>
+                    <img className="video-template" src={`${this.state.staticUrl}team1.png`}/>
                 </div>        
             </div>
 
@@ -141,7 +142,7 @@ export default class MainPage extends React.Component {
                 </div>
                 <div className="story-con">
                     <div className="story-item" id="first-item">
-                        <img  className="head-img" src={require('./toxiang1.png')}/>
+                        <img  className="head-img" src={`${this.state.staticUrl}toxiang1.png`}/>
                         <div className="item-wrap">
                         <div className="name">Meta Hirschl</div>
                         <div className="title">网页设计师</div>
@@ -153,7 +154,7 @@ export default class MainPage extends React.Component {
                         </div>
                     </div>
                     <div className="story-item second-item">
-                        <div><img  className="head-img" src={require('./toxiang2.png')}/></div>
+                        <div><img  className="head-img" src={`${this.state.staticUrl}toxiang2.png`}/></div>
                         <div className="item-wrap">
                         <div className="name">Brian Grant</div>
                         <div className="title">出国考研学生</div>
@@ -165,7 +166,7 @@ export default class MainPage extends React.Component {
                         </div>
                     </div>
                     <div className="story-item third-item">
-                        <div><img className="head-img" src={require('./toxiang3.png')}/></div>
+                        <div><img className="head-img" src={`${this.state.staticUrl}toxiang3.png`}/></div>
                         <div className="item-wrap">
                         <div className="name">Maxim Orlov</div>
                         <div className="title">创业者</div>
@@ -210,7 +211,7 @@ export default class MainPage extends React.Component {
                     <div className="foot-item">
                         <div className="foot-item-title">IHCI</div>
                         <div href="">关于我们</div>
-                        <div href=""><img className="wx" width='20px' height="20px" src={require('./wechat@2x.png')} /></div>
+                        <div href=""><img className="wx" width='20px' height="20px" src={`${this.state.staticUrl}wechat@2x.png`} /></div>
                     </div>
                     <div className="foot-item">
                         <div className="foot-item-title">iHCI俱乐部</div>
