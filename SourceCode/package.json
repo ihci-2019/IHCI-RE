@@ -6,7 +6,8 @@
     "build:dev": "./node_modules/.bin/webpack --config ./site/activity-react/webpack.dev.conf.js --progress --colors --display-error-details --watch",
     "build": "./node_modules/.bin/webpack --config ./site/activity-react/webpack.prod.conf.js --progress --colors --display-error-details",
     "analyse": "./node_modules/.bin/webpack --config ./site/activity-react/webpack.prod.conf.js --progress --colors --display-error-details --display-modules --sort-modules-by size",
-    "state": "./node_modules/.bin/webpack --config ./site/activity-react/webpack.prod.conf.js --progress --colors --display-error-details --profile --json > stats.json"
+    "state": "./node_modules/.bin/webpack --config ./site/activity-react/webpack.prod.conf.js --progress --colors --display-error-details --profile --json > stats.json",
+    "start":"node server/startup.js"
   },
   "dependencies": {
     "@alicloud/sms-sdk": "^1.1.3",

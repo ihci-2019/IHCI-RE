@@ -61,7 +61,7 @@ export default class Team extends React.Component{
                 this._page.loading.show(true)    
             }
         },100)
-
+ 
         result = await api('/api/getMyInfo', {
             method: 'POST',
             body: {}
@@ -72,7 +72,6 @@ export default class Team extends React.Component{
         teamList.map((item) => {
             teamIdList.push(item.teamId)
         })
-
         listResult = await api('/api/team/infoList', {
             method: 'POST',
             body: {
@@ -88,15 +87,35 @@ export default class Team extends React.Component{
                 managed: (item.role == 'creator' || item.role == 'admin')
             }
         })
-
+        const starTeam=teamList.filter(item=>{
+            return item.marked==true
+        })
+        const managedTeam=teamList.filter(item => {
+            return item.managed == true
+        })
         this.setState({
-            teamList: teamList
+            teamList: teamList,
+            starTeam: starTeam,
+            managedTeam: managedTeam
         })
         //已取回全部后端数据，关闭loading图标
         this._page.loading.show(false)
 
     }
-
+    getMoreManaged=async ()=>{
+        console.log('more')
+        this.setState({
+            managedPage: this.state.managedPage + 1,
+            managedFinish: (this.state.managedPage+1) * 5 >= this.state.managedTeam.length ? true : false
+        })
+    }
+    getMoreAll=async ()=>{
+        console.log('more')
+        this.setState({
+            allPage: this.state.allPage + 1,
+            allFinish: (this.state.allPage+1) * 5 >= this.state.teamList.length ? true : false
+        })
+    }
     starHandle = async (_id) => {
 
         const teamList = this.state.teamList
@@ -123,8 +142,12 @@ export default class Team extends React.Component{
                     item.marked = !item.marked
                 }
             })
+            const starTeam = teamList.filter(item => {
+                return item.marked == true
+            })
             this.setState({
-                teamList: teamList
+                teamList: teamList,
+                starTeam: starTeam
             })
         }
     }
@@ -136,6 +159,12 @@ export default class Team extends React.Component{
 
     state = {
         teamList: [],
+        starTeam: [],
+        managedTeam:[],
+        managedPage:0,
+        allPage:0,
+        managedFinish:false,
+        allFinished:false,
     }
     render() {
         return (
@@ -149,33 +178,38 @@ export default class Team extends React.Component{
                         <div className="head" onClick={this.starHandle}>星标团队</div>
                         <div className="team-list">
                             {   
-                                this.state.teamList.map((item) => {
-                                    if(item.marked == true) {
+                                this.state.starTeam.map((item) => {
                                         return <TeamGalleryItem key={'mark-team' + item._id} {...item} locationTo={this.locationTo} starHandle={this.starHandle} />
-                                    }
                                 })
                             }
                         </div>
 
                         <div className="head">我管理的团队</div>
                         <div className="team-list">
-                            {   
-                                this.state.teamList.map((item) => {
-                                    if(item.managed == true) {
+                            {   (()=>{
+                                 let page = this.state.managedPage;
+                                let currentTeam = this.state.managedTeam.slice(0,(page+1)*5);
+                                return  currentTeam.map((item) => {
                                         return <TeamListItem key={'manage-team' + item._id} {...item} locationTo={this.locationTo} starHandle={this.starHandle} />
-                                    }
                                 })
+                            })()
                             }
+                              <div class="load-more" onClick={this.getMoreManaged}>{this.state.managedFinish?'--没有更多了--':'加载更多'} </div>
                         </div>
 
                         <div className="head">我参与的团队</div>
                         <div className="team-list">
-                            {   
-                                this.state.teamList.map((item) => {
+                            {   (()=>{
+                                 let page = this.state.allPage;
+                                 let currentTeam = this.state.teamList.slice(0, (page + 1) * 5);
+                                return  currentTeam.map((item) => {
                                     return <TeamListItem key={'join-team' + item._id} {...item} locationTo={this.locationTo} starHandle={this.starHandle}  />
                                 })
+                            })()
                             }
+                            <div class="load-more" onClick={this.getMoreAll}>{this.state.allFinish?'--没有更多了--':'加载更多'} </div>
                         </div>
+                        
                     </div>
                 </div>
             </Page>

@@ -60,7 +60,7 @@
     .team-list {
         display: flex;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
         flex-wrap: wrap;
     }
     .team-item {
@@ -142,4 +142,9 @@
             }
         }
     }
+}
+.load-more{
+    color:#666;
+    font-size: 20px;
+    text-align: center;
 }
